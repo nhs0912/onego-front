@@ -1,5 +1,6 @@
 <template>
   <div>
+    ...slug page
     {{ $route.params.slug }}
   </div>
 </template>

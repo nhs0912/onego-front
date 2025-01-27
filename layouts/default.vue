@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated class="bg-dark text-white">
       <q-toolbar>
-        <q-toolbar-title>Vue Master Course</q-toolbar-title>
+        <q-toolbar-title>OneGo Project</q-toolbar-title>
         <q-separator dark vertical />
         <q-btn stretch flat label="Home" to="/" />
         <q-separator dark vertical />
