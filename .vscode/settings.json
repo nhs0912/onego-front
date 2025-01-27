@@ -1,3 +1,9 @@
-{
-    "editor.tabSize": 1
+{  
+  "files.autoSave": "afterDelay",
+  "editor.fontFamily": "D2Coding, Menlo, Monaco, 'Courier New', monospace",
+  "eslint.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.tabSize": 2
 }
