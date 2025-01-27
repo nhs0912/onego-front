@@ -7,9 +7,9 @@
       </p>
     </div>
     <div class="row q-col-gutter-lg">
-      <div v-for='{courseSlug, title, subtitle, thumbnail} in courses' :key='courseSlug'
+      <div v-for='{courseSlug, title, subtitle, thumbnail, path} in courses' :key='courseSlug'
         class='col-12 col-md-4 col-sm-6'>
-        <NuxtLink v-slot="{navigate}" custom :to="`/course/${courseSlug}`">
+        <NuxtLink v-slot="{navigate}" custom :to="path">
           <CourseCard :title="title" :subTitle='subtitle' 
           :thumbnail='thumbnail' @click='navigate'>
           </CourseCard>

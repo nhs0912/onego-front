@@ -22,6 +22,6 @@ defineProps({
 });
 
 defineEmits<{
-  click:[];
+  click:[]
 }>();
 </script>
