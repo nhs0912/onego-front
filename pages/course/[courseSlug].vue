@@ -35,10 +35,13 @@
         {{ course?.content }}
       </p>
       <template #footer>
-        <q-btn v-if="prevCourse" label='이전강의' color='primary' unleavated :to='prevCourse'></q-btn>
-        <q-btn  label='쿼리추가' color='dark' unleavated :to='{path : $route.path, query: {timestamp: Date.now()}}'></q-btn>
-        <q-space></q-space>
-        <q-btn v-if="nextCourse" label='다음강의' color='primary' unleavated :to='nextCourse'></q-btn>
+        <clientOnly>
+          <q-btn v-if="prevCourse" label='이전강의' color='primary' unleavated :to='prevCourse'></q-btn>
+          <q-btn label='쿼리추가' color='dark' unleavated
+            :to='{path : $route.path, query: {timestamp: Date.now()}}'></q-btn>
+          <q-space></q-space>
+          <q-btn v-if="nextCourse" label='다음강의' color='primary' unleavated :to='nextCourse'></q-btn>
+        </clientOnly>
       </template>
     </AppCard>
   </div>
@@ -48,10 +51,15 @@
 const route = useRoute();
 const { course, prevCourse, nextCourse }= useCourse( route.params.courseSlug as string);
 console.log('[courseSlug].vue 컴보넌트 setup hooks')
-
+// const title = ref('')
 definePageMeta({
-  key: (route) => route.fullPath
+  key: (route) => route.fullPath,
+  // title: title.value
+  title: 'My Home page',
+  pageType: '',
 });
+console.log('route.meta.title= ' , route.meta)
+
 </script>
 
 <style scoped></style>
