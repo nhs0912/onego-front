@@ -34,13 +34,24 @@
       <p class="q-mt-lg text-grey-8">
         {{ course?.content }}
       </p>
+      <template #footer>
+        <q-btn v-if="prevCourse" label='이전강의' color='primary' unleavated :to='prevCourse'></q-btn>
+        <q-btn  label='쿼리추가' color='dark' unleavated :to='{path : $route.path, query: {timestamp: Date.now()}}'></q-btn>
+        <q-space></q-space>
+        <q-btn v-if="nextCourse" label='다음강의' color='primary' unleavated :to='nextCourse'></q-btn>
+      </template>
     </AppCard>
   </div>
 </template>
 
 <script setup lang="ts">
 const route = useRoute();
-const { course }= useCourse( route.params.courseSlug as string);
+const { course, prevCourse, nextCourse }= useCourse( route.params.courseSlug as string);
+console.log('[courseSlug].vue 컴보넌트 setup hooks')
+
+definePageMeta({
+  key: (route) => route.fullPath
+});
 </script>
 
 <style scoped></style>

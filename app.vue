@@ -1,6 +1,7 @@
 <template>
 <NuxtLayout>
-  <NuxtPage></NuxtPage>>
+  <NuxtPage></NuxtPage>
+   <!-- <RouterView></RouterView> -->
 </NuxtLayout>
 </template>
 <script setup lang="ts">

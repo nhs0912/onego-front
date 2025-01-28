@@ -10,7 +10,7 @@
       </q-toolbar>
     </q-header>
     <q-page-container :style="pageContainerStyle">
-      <slot />
+      <slot></slot>
     </q-page-container>
   </q-layout>
 </template>
