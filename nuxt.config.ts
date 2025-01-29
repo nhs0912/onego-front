@@ -9,7 +9,15 @@ export default defineNuxtConfig({
     shim: false,
     typeCheck: true,
   },  
-  ssr: false
+  ssr: false,
+  imports: {
+    presets: [
+      {
+        from: 'vue-i18n',
+        imports: ['useI18n'],
+      },
+    ],
+  },
   // mode:'spa',
   // build: {
   //   ssr: false,
