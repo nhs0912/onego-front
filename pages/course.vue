@@ -34,5 +34,8 @@
 </template>
 
 <script setup lang="ts">
+
 const { courses } = useCourses();
+const { $hello } = useNuxtApp();
+const route = useRoute();
 </script>

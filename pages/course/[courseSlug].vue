@@ -45,7 +45,7 @@
           <q-btn v-if="prevCourse" label='이전강의' color='primary' unleavated @click="movePage(prevCourse.path)"
             :to='prevCourse.path'></q-btn>
           <q-btn label='쿼리추가' color='dark' unleavated
-            :to='{path : $route.path, query: {timestamp: Date.now()}}'></q-btn>
+            :to='{path : route.path, query: {timestamp: Date.now()}}'></q-btn>
           <q-space></q-space>
           <q-btn v-if="nextCourse" label='다음강의' color='primary' unleavated 
           @click="movePage(nextCourse.path)"
