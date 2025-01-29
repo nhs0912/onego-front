@@ -42,11 +42,14 @@
       </q-form>
       <template #footer>
         <clientOnly>
-          <q-btn v-if="prevCourse" label='이전강의' color='primary' unleavated :to='prevCourse'></q-btn>
+          <q-btn v-if="prevCourse" label='이전강의' color='primary' unleavated @click="movePage(prevCourse.path)"
+            :to='prevCourse.path'></q-btn>
           <q-btn label='쿼리추가' color='dark' unleavated
             :to='{path : $route.path, query: {timestamp: Date.now()}}'></q-btn>
           <q-space></q-space>
-          <q-btn v-if="nextCourse" label='다음강의' color='primary' unleavated :to='nextCourse'></q-btn>
+          <q-btn v-if="nextCourse" label='다음강의' color='primary' unleavated 
+          @click="movePage(nextCourse.path)"
+             :to='nextCourse.path'></q-btn>
         </clientOnly>
       </template>
     </AppCard>
@@ -70,6 +73,10 @@ definePageMeta({
 
 const memo = ref('')
 const completed = ref(false);
+
+const movePage = async (path: string) => {
+  await navigateTo(path);
+}
 </script>
 
 <style scoped></style>
