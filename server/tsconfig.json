@@ -1,6 +1,9 @@
 {
   "extends": "../.nuxt/tsconfig.server.json",
   "compilerOptions": {
-    "types": ["vite/client", "vue-router"]
+    "types": ["vite/client", "vue-router"],
+    "strict": false,
+    "noImplicitAny": false
+    
   }
 }
