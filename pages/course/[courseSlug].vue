@@ -64,7 +64,8 @@ definePageMeta({
   title: 'My Home page',
   pageType: '',
   keepalive: true,
-  alias: ['/lecture/:courseSlug']
+  alias: ['/lecture/:courseSlug'],
+  // layout:'same-layer'
 });
 
 const memo = ref('')
