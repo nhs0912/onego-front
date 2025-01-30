@@ -37,7 +37,7 @@
       <q-separator class="q-mb-lg" />
       <q-form class="q-gutter-y-md">
         <q-btn label="수강완료" class="full-width" color="green" unelevated :outline="completed? false : true"
-          :icon="completed? 'check' : undefined" @click="completed=!completed" />
+          :icon="completed? 'check' : undefined" @click="toggleComplete" />
         <q-input v-model="memo" type="textarea" outlined dense placeholder="메모를 작성해주세요." rows="3" autogrow />
       </q-form>
       <template #footer>
@@ -87,6 +87,11 @@ const completed = ref(false);
 const movePage = async (path: string) => {
   await navigateTo(path);
 }
+
+const toggleComplete = () => {
+  // $fetch('/api/error');
+  completed.value = !completed.value
+};
 </script>
 
 <style scoped></style>
