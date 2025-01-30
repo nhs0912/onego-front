@@ -37,7 +37,7 @@
       <q-separator class="q-mb-lg" />
       <q-form class="q-gutter-y-md">
         <q-btn label="수강완료" class="full-width" color="green" unelevated :outline="completed? false : true"
-          :icon="completed? 'check' : undefined" @click="completed=!completed" />
+          :icon="completed? 'check' : undefined" @click="toggleComplete" />
         <q-input v-model="memo" type="textarea" outlined dense placeholder="메모를 작성해주세요." rows="3" autogrow />
       </q-form>
       <template #footer>
@@ -63,20 +63,20 @@ if(!course) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Course not found',
-    fatal: true,
+    // fatal: true,
+    data:{
+      myCustomField: true,
+    }
   })
 }
-
 console.log('[courseSlug].vue 컴보넌트 setup hooks');
-
-
 // const title = ref('')
 definePageMeta({
   key: (route) => route.fullPath,
   // title: title.value
   title: 'My Home page',
   pageType: '',
-  keepalive: true,
+  // keepalive: true,
   alias: ['/lecture/:courseSlug'],
   // layout:'same-layer'
 });
@@ -87,6 +87,13 @@ const completed = ref(false);
 const movePage = async (path: string) => {
   await navigateTo(path);
 }
+
+const toggleComplete = () => {
+  // $fetch('/api/error');
+  // showError('에러가 발생하였습니다.')
+  completed.value = !completed.value
+  throw createError("에러가 발생하였습니다!");
+};
 </script>
 
 <style scoped></style>
