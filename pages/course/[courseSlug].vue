@@ -64,12 +64,12 @@ if(!course) {
     statusCode: 404,
     statusMessage: 'Course not found',
     fatal: true,
+    data:{
+      myCustomField: true,
+    }
   })
 }
-
 console.log('[courseSlug].vue 컴보넌트 setup hooks');
-
-
 // const title = ref('')
 definePageMeta({
   key: (route) => route.fullPath,
