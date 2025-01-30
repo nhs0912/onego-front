@@ -63,7 +63,7 @@ if(!course) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Course not found',
-    fatal: true,
+    // fatal: true,
     data:{
       myCustomField: true,
     }
@@ -76,7 +76,7 @@ definePageMeta({
   // title: title.value
   title: 'My Home page',
   pageType: '',
-  keepalive: true,
+  // keepalive: true,
   alias: ['/lecture/:courseSlug'],
   // layout:'same-layer'
 });

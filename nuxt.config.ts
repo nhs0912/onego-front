@@ -18,8 +18,12 @@ export default defineNuxtConfig({
       },
     ],
   },
-  // mode:'spa',
-  // build: {
-  //   ssr: false,
-  // }
-})
+  quasar  : {
+    plugins: ['Notify'],
+    config: {
+      notify:{
+        position: 'top-right',
+      }
+    }
+  },  
+});
