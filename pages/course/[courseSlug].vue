@@ -59,16 +59,16 @@
 <script setup lang="ts">
 const route = useRoute();
 const { course, prevCourse, nextCourse }= useCourse( route.params.courseSlug as string);
-if(!course) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Course not found',
-    // fatal: true,
-    data:{
-      myCustomField: true,
-    }
-  })
-}
+// if(!course) {
+//   throw createError({
+//     statusCode: 404,
+//     statusMessage: 'Course not found!!',
+//     // fatal: true,
+//     data:{
+//       myCustomField: true,
+//     }
+//   })
+// }
 console.log('[courseSlug].vue 컴보넌트 setup hooks');
 // const title = ref('')
 definePageMeta({
@@ -79,6 +79,22 @@ definePageMeta({
   // keepalive: true,
   alias: ['/lecture/:courseSlug'],
   // layout:'same-layer'
+  validate: (route)=> {
+    const courseSlug = route.params.courseSlug as string
+    const {course} = useCourse(courseSlug);
+    if(!course) {
+      // return false;
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'Course not found!!',
+        // fatal: true,
+        data:{
+          myCustomField: true,
+        }
+      })
+    }
+    return true;
+  }
 });
 
 const memo = ref('')

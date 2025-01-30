@@ -33,13 +33,13 @@
       <div class="col">
         <NuxtErrorBoundary>
           <NuxtPage />
-          <template #error = "{ error }">
-            <div class='flex flex-center column q-py-xl'>
-              <div class='text-h6 q-mb-lg'>
-                {{error}}
+          <template #error="{ error }">
+            <div class="flex flex-center column q-py-xl">
+              <div class="text-h6 q-mb-lg">
+                {{ error }}
               </div>
-              <q-btn label ='Reset' color='positive' no-caps @click='error.value = null'></q-btn>
-            
+              <q-btn label="Reset" color="positive" no-caps @click="error.value=null" to='/' />
+
             </div>
           </template>
         </NuxtErrorBoundary>
@@ -55,4 +55,5 @@
 const { courses } = useCourses();
 const { $hello } = useNuxtApp();
 const route = useRoute();
+
 </script>
