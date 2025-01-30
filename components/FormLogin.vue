@@ -3,7 +3,7 @@
     <q-input v-model="form.email" filled :label="t('email')" />
 
     <q-input v-model="form.passwowrd" filled type="password" :label="t('password')" />
-
+    <div v-if='error' class='text-red text-center' >{{ error.message }}</div>
     <div class="q-mt-lg">
       <q-btn class="full-width" :label="t('login')" type="submit" size="lg" color="primary" no-caps
         :loading="loading" />
@@ -15,6 +15,8 @@
 const emit = defineEmits<{
   success: [];
 }>();
+
+const { signIn } = useAuth();
 // const emit = defineEmits(['success']);
 const { t } = useI18n();
 const form = ref({
@@ -28,8 +30,8 @@ const handleLoginSubmit = () => {
   try {
     error.value = null;
     loading.value = true;
-
     // login business logic
+    signIn(form.value.email, form.value.passwowrd);
 
     emit('success');
   } catch (err: unknown) {
@@ -39,9 +41,7 @@ const handleLoginSubmit = () => {
       throw Error;
     }
   } finally {
-    setTimeout(() => {
-      loading.value = false;
-    }, 1500);
+    loading.value = false;
   }
 };
 </script>
