@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated class="bg-dark text-white">
       <q-toolbar>
-        <q-toolbar-title>OneGo Project</q-toolbar-title>
+        <q-toolbar-title>OneGo</q-toolbar-title>
         <q-separator dark vertical />
         <NuxtLink v-slot="{ navigate }" custom to="/">
           <q-btn stretch flat :label="t('home')" no-caps @click="navigate()" />
@@ -26,8 +26,6 @@
           <q-btn stretch flat :label="t('custom')" no-caps @click="navigate()" />
         </NuxtLink>
         <q-separator dark vertical />
-        <q-space></q-space>
-        <q-separator dark vertical />
         <q-btn-dropdown stretch flat no-caps :label="selectedLanguageName">
           <q-list padding dense>
             <q-item v-for="{ code, name } in languages" :key="code" v-close-popup clickable
@@ -38,23 +36,29 @@
             </q-item>
           </q-list>
         </q-btn-dropdown>
+        <!-- <q-btn v-if=isAuthenticated class='bg-grey text-white'>{{ authUser?.email }}</q-btn> -->
+        <SigninStatusCard v-if=isAuthenticated :account="authUser?.email"></SigninStatusCard>
         <q-separator dark vertical />
-        <NuxtLink v-slot="{ navigate }" custom to="/login">
+        <NuxtLink v-if=!isAuthenticated v-slot="{ navigate }" custom to="/login">
           <q-btn stretch flat :label="t('login')" no-caps @click="navigate()" />
         </NuxtLink>
-        <q-separator dark vertical />
-        <NuxtLink v-slot="{ navigate }" custom to="/">
-          <q-btn stretch flat :label="t('logout')" no-caps @click="navigate()" />
-        </NuxtLink>
+        <!-- <q-btn v-else class='bg-grey text-white'>{{ authUser }}</q-btn> -->
+        <q-btn v-else stretch flat :label="t('logout')" no-caps @click="signOut()" />
       </q-toolbar>
     </q-header>
     <q-page-container :style="pageContainerStyle">
+      <q-banner v-if=isAuthenticated class='bg-primary text-white'>
+        {{ authUser }}
+      </q-banner>
       <slot></slot>
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup lang="ts">
+const { authUser, isAuthenticated } = useAuthUser();
+const { signOut } = useAuth();
+
 const pageContainerStyle = computed(() => ({
   maxWidth: '1080px',
   margin: '0 auto',
