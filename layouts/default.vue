@@ -2,6 +2,10 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated class="bg-dark text-white">
       <q-toolbar>
+        <q-btn flat round dense icon="menu" class="q-mr-sm" />
+        <q-avatar>
+          <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+        </q-avatar>
         <q-toolbar-title>OneGo</q-toolbar-title>
         <q-separator dark vertical />
         <NuxtLink v-slot="{ navigate }" custom to="/">
@@ -39,11 +43,14 @@
         <!-- <q-btn v-if=isAuthenticated class='bg-grey text-white'>{{ authUser?.email }}</q-btn> -->
         <SigninStatusCard v-if=isAuthenticated :account="authUser?.email"></SigninStatusCard>
         <q-separator dark vertical />
+        <q-btn flat round dense icon="search" />
+
         <NuxtLink v-if=!isAuthenticated v-slot="{ navigate }" custom to="/login">
           <q-btn stretch flat :label="t('login')" no-caps @click="navigate()" />
         </NuxtLink>
         <!-- <q-btn v-else class='bg-grey text-white'>{{ authUser }}</q-btn> -->
         <q-btn v-else stretch flat :label="t('logout')" no-caps @click="signOut()" />
+
       </q-toolbar>
     </q-header>
     <q-page-container :style="pageContainerStyle">
