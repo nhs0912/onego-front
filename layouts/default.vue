@@ -26,6 +26,8 @@
           <q-btn stretch flat :label="t('custom')" no-caps @click="navigate()" />
         </NuxtLink>
         <q-separator dark vertical />
+        <q-space></q-space>
+        <q-separator dark vertical />
         <q-btn-dropdown stretch flat no-caps :label="selectedLanguageName">
           <q-list padding dense>
             <q-item v-for="{ code, name } in languages" :key="code" v-close-popup clickable
@@ -36,6 +38,14 @@
             </q-item>
           </q-list>
         </q-btn-dropdown>
+        <q-separator dark vertical />
+        <NuxtLink v-slot="{ navigate }" custom to="/login">
+          <q-btn stretch flat :label="t('login')" no-caps @click="navigate()" />
+        </NuxtLink>
+        <q-separator dark vertical />
+        <NuxtLink v-slot="{ navigate }" custom to="/">
+          <q-btn stretch flat :label="t('logout')" no-caps @click="navigate()" />
+        </NuxtLink>
       </q-toolbar>
     </q-header>
     <q-page-container :style="pageContainerStyle">
@@ -54,10 +64,11 @@ const pageContainerStyle = computed(() => ({
 const moveYoutube = async () => {
   await navigateTo(
     'https://youtube.com', {
-      external: true,
-      open: { target: '_blank' },
-    }
-  )}; 
+    external: true,
+    open: { target: '_blank' },
+  }
+  )
+};
 
 interface Language {
   name: string;
@@ -69,7 +80,7 @@ const languages = ref<Language[]>([
   { name: '한국어', code: 'ko' },
 ]);
 
-const { locale, t } = useI18n(); 
+const { locale, t } = useI18n();
 
 const selectedLanguageName = computed(
   () => languages.value.find((lang) => lang.code === locale.value)?.name,

@@ -1,10 +1,8 @@
 <template>
   <q-page padding>
     <div class="q-my-xl text-center">
-      <div class="text-h4">Custom settings Page</div>
-      <p class="q-mt-sm text-grey-8">
-        Custom Layout settings!!
-      </p>
+      <PageTitle title='Custom settings Page'></PageTitle>
+      <PageDescription description='Custom settings Page'></PageDescription>
     </div>
   </q-page>
 </template>
