@@ -3,7 +3,7 @@
 <q-page padding>
   <div class='text-center q-py-xl'>
     <div class='text-h4'>
-      {{ $route.path }}
+      {{ route.path }}
     </div>
   </div>
 </q-page>
@@ -15,7 +15,7 @@ export default {};
   console.log('prefetching-2')
 </scipt>
 <script setup lang="ts">
-
+const route = useRoute();
 </script>
 
 <style scoped>

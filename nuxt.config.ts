@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     shim: false,
     typeCheck: true,
   },  
-  ssr: false,
+  ssr: true,
   imports: {
     presets: [
       {

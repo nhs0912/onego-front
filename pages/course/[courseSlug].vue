@@ -45,7 +45,7 @@
           <q-btn v-if="prevCourse" label='이전강의' color='primary' unleavated @click="movePage(prevCourse.path)"
             :to='prevCourse.path'></q-btn>
           <q-btn label='쿼리추가' color='dark' unleavated
-            :to='{path : $route.path, query: {timestamp: Date.now()}}'></q-btn>
+            :to='{path : route.path, query: {timestamp: Date.now()}}'></q-btn>
           <q-space></q-space>
           <q-btn v-if="nextCourse" label='다음강의' color='primary' unleavated 
           @click="movePage(nextCourse.path)"
@@ -59,7 +59,17 @@
 <script setup lang="ts">
 const route = useRoute();
 const { course, prevCourse, nextCourse }= useCourse( route.params.courseSlug as string);
-console.log('[courseSlug].vue 컴보넌트 setup hooks')
+if(!course) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Course not found',
+    fatal: true,
+  })
+}
+
+console.log('[courseSlug].vue 컴보넌트 setup hooks');
+
+
 // const title = ref('')
 definePageMeta({
   key: (route) => route.fullPath,

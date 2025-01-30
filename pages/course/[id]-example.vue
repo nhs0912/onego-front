@@ -2,7 +2,7 @@
   <q-page padding>
     <h2>Course</h2>
     <div class='text-subtitle1'>
-      {{ $route.params }}
+      {{ route.params }}
     </div>
   </q-page>
 </template>

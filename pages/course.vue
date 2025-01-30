@@ -10,10 +10,15 @@
                 {{ index + 1 }}. {{ course.title }}
               </q-item-section>
             </q-item>
-            
+            <q-item v-ripple clickable to="/course/empty">
+              <q-item-section>
+                Empty Course (Throw Error)
+              </q-item-section>
+            </q-item>
+
             <!-- <NuxtLink to='/course/prefetching-2'>Prefetching test 2</NuxtLink>
             <NuxtLink to='/course/prefetching-3'>Prefetching test 3</NuxtLink> -->
-            <NuxtLink v-slot="{ navigate }" custom to="/course/prefetching-1">
+            <NuxtLink v-slot=" { navigate }" custom to="/course/prefetching-1">
               <q-item clickable @click="navigate()">Prefetching Test 1</q-item>
             </NuxtLink>
             <NuxtLink v-slot="{ navigate }" custom to="/course/prefetching-2">
@@ -34,5 +39,8 @@
 </template>
 
 <script setup lang="ts">
+
 const { courses } = useCourses();
+const { $hello } = useNuxtApp();
+const route = useRoute();
 </script>
