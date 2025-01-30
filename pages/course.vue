@@ -38,7 +38,7 @@
               <div class='text-h6 q-mb-lg'>
                 {{error}}
               </div>
-              <q-btn label ='Reset' color='positive' no-caps @click='error.value= null'></q-btn>
+              <q-btn label ='Reset' color='positive' no-caps @click='error.value = null'></q-btn>
             
             </div>
           </template>
