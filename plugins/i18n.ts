@@ -12,6 +12,11 @@ const i18n = createI18n({
         admin: 'Admin',
         custom: 'Custom',
         course: 'Course',
+        login: 'Login',
+        logout: 'Logout',
+        hello: 'Hello',
+        email: 'email',
+        password: 'password',
       },
       'ko': {
         home: '홈',
@@ -20,6 +25,11 @@ const i18n = createI18n({
         admin: '관리자',
         custom: '커스텀',
         course: '코스',
+        login: '로그인',
+        logout: '로그아웃',
+        hello: '안녕하세요',
+        email: '이메일',
+        password: "비밀번호",
       },
     },
   });

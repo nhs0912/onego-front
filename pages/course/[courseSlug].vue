@@ -6,11 +6,11 @@
         <div class="flex q-gutter-x-sm items-center q-mt-sm text-grey-8">
           <span class="flex items-center">
             <q-icon name="star" size="16px" color="orange" />
-            <span>{{course?.rating}}</span>
+            <span>{{ course?.rating }}</span>
           </span>
-          <span> {{course?.reviewsCount}}개의 수강평 </span>
+          <span> {{ course?.reviewsCount }}개의 수강평 </span>
           <span>&middot;</span>
-          <span>{{course?.studentCount}}명의 수강생</span>
+          <span>{{ course?.studentCount }}명의 수강생</span>
           <q-space />
           <a class="text-bold" href="course?.reviewsUrl" target="_blank">
             수강평 보기
@@ -36,8 +36,8 @@
       </p>
       <q-separator class="q-mb-lg" />
       <q-form class="q-gutter-y-md">
-        <q-btn label="수강완료" class="full-width" color="green" unelevated :outline="completed? false : true"
-          :icon="completed? 'check' : undefined" @click="toggleComplete" />
+        <q-btn label="수강완료" class="full-width" color="green" unelevated :outline="completed ? false : true"
+          :icon="completed ? 'check' : undefined" @click="toggleComplete" />
         <q-input v-model="memo" type="textarea" outlined dense placeholder="메모를 작성해주세요." rows="3" autogrow />
       </q-form>
       <template #footer>
@@ -45,11 +45,10 @@
           <q-btn v-if="prevCourse" label='이전강의' color='primary' unleavated @click="movePage(prevCourse.path)"
             :to='prevCourse.path'></q-btn>
           <q-btn label='쿼리추가' color='dark' unleavated
-            :to='{path : route.path, query: {timestamp: Date.now()}}'></q-btn>
+            :to='{ path: route.path, query: { timestamp: Date.now() } }'></q-btn>
           <q-space></q-space>
-          <q-btn v-if="nextCourse" label='다음강의' color='primary' unleavated 
-          @click="movePage(nextCourse.path)"
-             :to='nextCourse.path'></q-btn>
+          <q-btn v-if="nextCourse" label='다음강의' color='primary' unleavated @click="movePage(nextCourse.path)"
+            :to='nextCourse.path'></q-btn>
         </clientOnly>
       </template>
     </AppCard>
@@ -58,17 +57,17 @@
 
 <script setup lang="ts">
 const route = useRoute();
-const { course, prevCourse, nextCourse }= useCourse( route.params.courseSlug as string);
-if(!course) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Course not found',
-    // fatal: true,
-    data:{
-      myCustomField: true,
-    }
-  })
-}
+const { course, prevCourse, nextCourse } = useCourse(route.params.courseSlug as string);
+// if(!course) {
+//   throw createError({
+//     statusCode: 404,
+//     statusMessage: 'Course not found!!',
+//     // fatal: true,
+//     data:{
+//       myCustomField: true,
+//     }
+//   })
+// }
 console.log('[courseSlug].vue 컴보넌트 setup hooks');
 // const title = ref('')
 definePageMeta({
@@ -79,6 +78,20 @@ definePageMeta({
   // keepalive: true,
   alias: ['/lecture/:courseSlug'],
   // layout:'same-layer'
+  // validate: (route)=> {
+  middleware: (route) => {
+    const courseSlug = route.params.courseSlug as string
+    const { course } = useCourse(courseSlug);
+    if (!course) {
+      // return navigateTo('/');
+      return abortNavigation(
+        createError({
+          statusCode: 404,
+          statusMessage: 'Course not found!!',
+          fatal: true,
+        }))
+    }
+  }
 });
 
 const memo = ref('')

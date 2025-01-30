@@ -1,4 +1,4 @@
-import { Notify} from "quasar"
+import { Notify } from "quasar"
 
 export default defineNuxtPlugin((nuxtApp)=> {
   nuxtApp.hook('app:error', (err)=> {
