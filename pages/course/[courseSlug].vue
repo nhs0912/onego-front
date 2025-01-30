@@ -59,7 +59,17 @@
 <script setup lang="ts">
 const route = useRoute();
 const { course, prevCourse, nextCourse }= useCourse( route.params.courseSlug as string);
-console.log('[courseSlug].vue 컴보넌트 setup hooks')
+if(!course) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Course not found',
+    fatal: true,
+  })
+}
+
+console.log('[courseSlug].vue 컴보넌트 setup hooks');
+
+
 // const title = ref('')
 definePageMeta({
   key: (route) => route.fullPath,

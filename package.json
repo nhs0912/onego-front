@@ -13,14 +13,14 @@
     "lint-prettier": "prettier --write \"**/*.(ts|tsx|vue|js|json)\""
   },
   "dependencies": {
-    "@quasar/extras": "^1.16.16",
-    "nuxt": "^3.15.2",
-    "quasar": "^2.17.7",
+    "@quasar/extras": "^1.16.9",
+    "nuxt": "^3.9.0",
+    "quasar": "^2.14.2",
     "vue": "^3.4.3",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "nuxt-quasar-ui": "^2.1.9",
+    "nuxt-quasar-ui": "^2.0.7",
     "typescript": "^5.7.3",
     "vue-i18n": "^11.0.1",
     "vue-tsc": "^2.1.10"
