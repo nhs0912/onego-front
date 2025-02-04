@@ -19,6 +19,7 @@
 <script setup lang="ts">
 
 const { courses } = useCourses();
+
 </script>
 
 <style scoped></style>
