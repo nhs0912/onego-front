@@ -10,6 +10,9 @@
 
 <script setup lang="ts">
 const { t } = useI18n();
+definePageMeta({
+  middleware: ['guest-only']
+});
 const handleLoginSuccess = async () => {
   const { isAdmin } = useAuthUser();
   const redirect = isAdmin.value ? '/admin' : '/';
