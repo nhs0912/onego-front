@@ -1,5 +1,6 @@
 export default defineNuxtRouteMiddleware(() => {
-  const { isAdmin, isAuthenticated } = useAuthUser();
+  const isAdmin = useAdmin();
+  const isAuthenticated = useAuthenticated();
   console.log("isAdmin = {}", isAdmin);
   console.log("isAuthenticated = {}", isAuthenticated);
   if (!isAuthenticated.value) {

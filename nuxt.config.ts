@@ -1,14 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
-    modules: [
-    'nuxt-quasar-ui'
-  ],
+  modules: ['nuxt-quasar-ui', '@pinia/nuxt'],
   devtools: { enabled: true },
-  typescript : {
+  typescript: {
     shim: false,
     typeCheck: true,
-  },  
+  },
   ssr: true,
   imports: {
     presets: [
@@ -18,12 +16,12 @@ export default defineNuxtConfig({
       },
     ],
   },
-  quasar  : {
+  quasar: {
     plugins: ['Notify'],
     config: {
-      notify:{
+      notify: {
         position: 'top-right',
-      }
-    }
-  },  
+      },
+    },
+  },
 });
