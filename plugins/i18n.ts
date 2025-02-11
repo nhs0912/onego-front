@@ -1,11 +1,11 @@
-import {createI18n} from 'vue-i18n';
-export default defineNuxtPlugin(({vueApp})=> {
-const i18n = createI18n({
+import { createI18n } from 'vue-i18n';
+export default defineNuxtPlugin(({ vueApp }) => {
+  const i18n = createI18n({
     legacy: false,
     globalInjection: true,
-    locale: useDefaultLocale().value,
+    locale: useCookie('locale').value || useDefaultLocale().value,
     messages: {
-      'en': {
+      en: {
         home: 'Home',
         about: 'About',
         youtube: 'Youtube',
@@ -18,7 +18,7 @@ const i18n = createI18n({
         email: 'email',
         password: 'password',
       },
-      'ko': {
+      ko: {
         home: '홈',
         about: '어바웃',
         youtube: '유튜브',
@@ -29,7 +29,7 @@ const i18n = createI18n({
         logout: '로그아웃',
         hello: '안녕하세요',
         email: '이메일',
-        password: "비밀번호",
+        password: '비밀번호',
       },
     },
   });
