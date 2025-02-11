@@ -1,12 +1,12 @@
 <template>
   <q-form class="q-gutter-lg" @submit.prevent="handleLoginSubmit">
-    <q-input v-model="form.email" filled :label="t('email')" />
+    <q-input v-model="form.email" filled :label="t('email')"/>
 
-    <q-input v-model="form.passwowrd" filled type="password" :label="t('password')" />
-    <div v-if='error' class='text-red text-center' >{{ error.message }}</div>
+    <q-input v-model="form.passwowrd" filled type="password" :label="t('password')"/>
+    <div v-if='error' class='text-red text-center'>{{ error.message }}</div>
     <div class="q-mt-lg">
       <q-btn class="full-width" :label="t('login')" type="submit" size="lg" color="primary" no-caps
-        :loading="loading" />
+             :loading="loading"/>
     </div>
   </q-form>
 </template>
@@ -16,9 +16,10 @@ const emit = defineEmits<{
   success: [];
 }>();
 
-const { signIn } = useAuth();
+// const { signIn } = useAuth();
+const {signIn} = useAuthStore();
 // const emit = defineEmits(['success']);
-const { t } = useI18n();
+const {t} = useI18n();
 const form = ref({
   email: '',
   passwowrd: '',

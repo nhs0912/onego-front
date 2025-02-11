@@ -9,12 +9,14 @@
 </template>
 
 <script setup lang="ts">
+
 const { t } = useI18n();
 definePageMeta({
   middleware: ['guest-only']
 });
 const handleLoginSuccess = async () => {
-  const { isAdmin } = useAuthUser();
+  const { isAdmin} = storeToRefs(useAuthStore());
+  // const isAdmin = useAdmin();
   const redirect = isAdmin.value ? '/admin' : '/';
   await navigateTo(redirect);
 };

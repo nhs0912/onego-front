@@ -4,9 +4,9 @@
       <q-toolbar>
         <q-btn flat round dense icon="menu" class="q-mr-sm" />
         <q-avatar>
-          <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
         </q-avatar>
-        <q-toolbar-title>OneGo</q-toolbar-title>
+        <q-toolbar-title>OneGo </q-toolbar-title>
         <q-separator dark vertical />
         <NuxtLink v-slot="{ navigate }" custom to="/">
           <q-btn stretch flat :label="t('home')" no-caps @click="navigate()" />
@@ -41,21 +41,18 @@
           </q-list>
         </q-btn-dropdown>
         <!-- <q-btn v-if=isAuthenticated class='bg-grey text-white'>{{ authUser?.email }}</q-btn> -->
-        <SigninStatusCard v-if=isAuthenticated :accountName="authUser?.name" :account="authUser?.email">
-        </SigninStatusCard>
+        <SigninStatusCard v-if="isAuthenticated" :account-name="authUser?.name" :account="authUser?.email" />
         <q-separator dark vertical />
-        <NuxtLink v-if=!isAuthenticated v-slot="{ navigate }" custom to="/login">
+        <NuxtLink v-if="!isAuthenticated" v-slot="{ navigate }" custom to="/login">
           <q-btn stretch flat :label="t('login')" no-caps @click="navigate()" />
         </NuxtLink>
         <q-btn v-else stretch flat :label="t('logout')" no-caps @click="signOut()" />
         <q-btn flat round dense icon="search" />
         <!-- <q-btn v-else class='bg-grey text-white'>{{ authUser }}</q-btn> -->
-
-
       </q-toolbar>
     </q-header>
     <q-page-container :style="pageContainerStyle">
-      <q-banner v-if=isAuthenticated class='bg-primary text-white'>
+      <q-banner v-if="isAuthenticated" class="bg-primary text-white">
         {{ authUser }}
       </q-banner>
       <slot></slot>
@@ -64,8 +61,11 @@
 </template>
 
 <script setup lang="ts">
-const { authUser, isAuthenticated } = useAuthUser();
-const { signOut } = useAuth();
+// const { signOut } = useAuth();
+const authStore = useAuthStore();
+const {user : authUser, isAuthenticated} = storeToRefs(authStore);
+const { signOut } = authStore;
+
 
 const pageContainerStyle = computed(() => ({
   maxWidth: '1080px',
@@ -74,12 +74,10 @@ const pageContainerStyle = computed(() => ({
 // import { useI18n } from 'vue-i18n';
 
 const moveYoutube = async () => {
-  await navigateTo(
-    'https://youtube.com', {
+  await navigateTo('https://youtube.com', {
     external: true,
     open: { target: '_blank' },
-  }
-  )
+  });
 };
 
 interface Language {
