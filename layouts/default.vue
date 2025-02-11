@@ -20,20 +20,38 @@
           <q-btn stretch flat :label="t('course')" no-caps @click="navigate" />
         </NuxtLink>
         <q-separator dark vertical />
-        <q-btn stretch flat :label="t('youtube')" no-caps @click="moveYoutube()" />
+        <q-btn
+          stretch
+          flat
+          :label="t('youtube')"
+          no-caps
+          @click="moveYoutube()"
+        />
         <q-separator dark vertical />
         <NuxtLink v-slot="{ navigate }" custom to="/admin">
           <q-btn stretch flat :label="t('admin')" no-caps @click="navigate()" />
         </NuxtLink>
         <q-separator dark vertical />
         <NuxtLink v-slot="{ navigate }" custom to="/custom">
-          <q-btn stretch flat :label="t('custom')" no-caps @click="navigate()" />
+          <q-btn
+            stretch
+            flat
+            :label="t('custom')"
+            no-caps
+            @click="navigate()"
+          />
         </NuxtLink>
         <q-separator dark vertical />
         <q-btn-dropdown stretch flat no-caps :label="selectedLanguageName">
           <q-list padding dense>
-            <q-item v-for="{ code, name } in languages" :key="code" v-close-popup clickable
-              :active="code === $i18n.locale" @click="$i18n.locale = code">
+            <q-item
+              v-for="{ code, name } in languages"
+              :key="code"
+              v-close-popup
+              clickable
+              :active="code === $i18n.locale"
+              @click="$i18n.locale = code"
+            >
               <q-item-section>
                 <q-item-label>{{ name }}</q-item-label>
               </q-item-section>
@@ -41,12 +59,28 @@
           </q-list>
         </q-btn-dropdown>
         <!-- <q-btn v-if=isAuthenticated class='bg-grey text-white'>{{ authUser?.email }}</q-btn> -->
-        <SigninStatusCard v-if="isAuthenticated" :account-name="authUser?.name" :account="authUser?.email" />
+        <SigninStatusCard
+          v-if="isAuthenticated"
+          :account-name="authUser?.name"
+          :account="authUser?.email"
+        />
         <q-separator dark vertical />
-        <NuxtLink v-if="!isAuthenticated" v-slot="{ navigate }" custom to="/login">
+        <NuxtLink
+          v-if="!isAuthenticated"
+          v-slot="{ navigate }"
+          custom
+          to="/login"
+        >
           <q-btn stretch flat :label="t('login')" no-caps @click="navigate()" />
         </NuxtLink>
-        <q-btn v-else stretch flat :label="t('logout')" no-caps @click="signOut()" />
+        <q-btn
+          v-else
+          stretch
+          flat
+          :label="t('logout')"
+          no-caps
+          @click="signOut()"
+        />
         <q-btn flat round dense icon="search" />
         <!-- <q-btn v-else class='bg-grey text-white'>{{ authUser }}</q-btn> -->
       </q-toolbar>
@@ -63,9 +97,8 @@
 <script setup lang="ts">
 // const { signOut } = useAuth();
 const authStore = useAuthStore();
-const {user : authUser, isAuthenticated} = storeToRefs(authStore);
+const { user: authUser, isAuthenticated } = storeToRefs(authStore);
 const { signOut } = authStore;
-
 
 const pageContainerStyle = computed(() => ({
   maxWidth: '1080px',
