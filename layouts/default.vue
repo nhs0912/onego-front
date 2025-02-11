@@ -59,6 +59,7 @@
           </q-list>
         </q-btn-dropdown>
         <!-- <q-btn v-if=isAuthenticated class='bg-grey text-white'>{{ authUser?.email }}</q-btn> -->
+        <!-- <ClientOnly> -->
         <SigninStatusCard
           v-if="isAuthenticated"
           :account-name="authUser?.name"
@@ -81,14 +82,17 @@
           no-caps
           @click="signOut()"
         />
+        <!-- </ClientOnly> -->
         <q-btn flat round dense icon="search" />
         <!-- <q-btn v-else class='bg-grey text-white'>{{ authUser }}</q-btn> -->
       </q-toolbar>
     </q-header>
     <q-page-container :style="pageContainerStyle">
+      <!-- <ClientOnly> -->
       <q-banner v-if="isAuthenticated" class="bg-primary text-white">
         {{ authUser }}
       </q-banner>
+      <!-- </ClientOnly> -->
       <slot></slot>
     </q-page-container>
   </q-layout>
