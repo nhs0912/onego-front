@@ -3,22 +3,28 @@
     <div class="row q-col-gutter-md">
       <div class="col-3">
         <q-card>
-          <q-item-label header>강의 로드맵 ({{ $hello('heeseok')}})</q-item-label>
+          <q-item-label header
+            >강의 로드맵 ({{ $hello('heeseok') }})</q-item-label
+          >
           <q-list bordered separator>
-            <q-item v-for="(course, index) in courses" :key="course.courseSlug" v-ripple clickable :to="course.path">
+            <q-item
+              v-for="(course, index) in courses"
+              :key="course.courseSlug"
+              v-ripple
+              clickable
+              :to="course.path"
+            >
               <q-item-section>
                 {{ index + 1 }}. {{ course.title }}
               </q-item-section>
             </q-item>
             <q-item v-ripple clickable to="/course/empty">
-              <q-item-section>
-                Empty Course (Throw Error)
-              </q-item-section>
+              <q-item-section> Empty Course (Throw Error) </q-item-section>
             </q-item>
 
             <!-- <NuxtLink to='/course/prefetching-2'>Prefetching test 2</NuxtLink>
             <NuxtLink to='/course/prefetching-3'>Prefetching test 3</NuxtLink> -->
-            <NuxtLink v-slot=" { navigate }" custom to="/course/prefetching-1">
+            <NuxtLink v-slot="{ navigate }" custom to="/course/prefetching-1">
               <q-item clickable @click="navigate()">Prefetching Test 1</q-item>
             </NuxtLink>
             <NuxtLink v-slot="{ navigate }" custom to="/course/prefetching-2">
@@ -38,22 +44,25 @@
               <div class="text-h6 q-mb-lg">
                 {{ error }}
               </div>
-              <q-btn label="Reset" color="positive" no-caps @click="error.value=null" to='/' />
-
+              <q-btn
+                label="Reset"
+                color="positive"
+                no-caps
+                to="/"
+                @click="error.value = null"
+              />
             </div>
           </template>
         </NuxtErrorBoundary>
       </div>
     </div>
-
   </q-page>
 </template>
 
 <script setup lang="ts">
 // import error from '~/server/api/error';
 
-const { courses } = useCourses();
+const { courses } = await useCourses();
 const { $hello } = useNuxtApp();
-const route = useRoute();
-
+// const route = useRoute();
 </script>
