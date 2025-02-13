@@ -1,4 +1,4 @@
-import { getCourses } from '~/server/models/course';
+import { getCourses } from '~/server/api/models/course';
 
 export default defineEventHandler(() => {
   const courses = getCourses();
