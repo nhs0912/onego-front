@@ -19,16 +19,28 @@
       </template>
 
       <div class="q-mb-md">
-        <VideoPlayer :src='course?.video' />
+        <VideoPlayer :src="course?.video" />
       </div>
       <div class="row q-col-gutter-md">
         <div class="col-6">
-          <q-btn label="인프런에서 수강하기" unelevated class="full-width" color="primary" :href="course?.inflearnUrl"
-            target="_blank" />
+          <q-btn
+            label="인프런에서 수강하기"
+            unelevated
+            class="full-width"
+            color="primary"
+            :href="course?.inflearnUrl"
+            target="_blank"
+          />
         </div>
         <div class="col-6">
-          <q-btn label="짐코딩 클럽에서 수강하기" unelevated class="full-width" color="red" :href="course?.gymcodingUrl"
-            target="_blank" />
+          <q-btn
+            label="짐코딩 클럽에서 수강하기"
+            unelevated
+            class="full-width"
+            color="red"
+            :href="course?.gymcodingUrl"
+            target="_blank"
+          />
         </div>
       </div>
       <p class="q-mt-lg text-grey-8">
@@ -36,19 +48,50 @@
       </p>
       <q-separator class="q-mb-lg" />
       <q-form class="q-gutter-y-md">
-        <q-btn label="수강완료" class="full-width" color="green" unelevated :outline="completed ? false : true"
-          :icon="completed ? 'check' : undefined" @click="toggleComplete" />
-        <q-input v-model="memo" type="textarea" outlined dense placeholder="메모를 작성해주세요." rows="3" autogrow />
+        <q-btn
+          label="수강완료"
+          class="full-width"
+          color="green"
+          unelevated
+          :outline="completed ? false : true"
+          :icon="completed ? 'check' : undefined"
+          @click="toggleComplete"
+        />
+        <q-input
+          v-model="memo"
+          type="textarea"
+          outlined
+          dense
+          placeholder="메모를 작성해주세요."
+          rows="3"
+          autogrow
+        />
       </q-form>
       <template #footer>
         <clientOnly>
-          <q-btn v-if="prevCourse" label='이전강의' color='primary' unleavated @click="movePage(prevCourse.path)"
-            :to='prevCourse.path'></q-btn>
-          <q-btn label='쿼리추가' color='dark' unleavated
-            :to='{ path: route.path, query: { timestamp: Date.now() } }'></q-btn>
-          <q-space></q-space>
-          <q-btn v-if="nextCourse" label='다음강의' color='primary' unleavated @click="movePage(nextCourse.path)"
-            :to='nextCourse.path'></q-btn>
+          <q-btn
+            v-if="prevCourse"
+            label="이전강의"
+            color="primary"
+            unleavated
+            :to="prevCourse.path"
+            @click="movePage(prevCourse.path)"
+          />
+          <q-btn
+            label="쿼리추가"
+            color="dark"
+            unleavated
+            :to="{ path: route.path, query: { timestamp: Date.now() } }"
+          />
+          <q-space />
+          <q-btn
+            v-if="nextCourse"
+            label="다음강의"
+            color="primary"
+            unleavated
+            :to="nextCourse.path"
+            @click="movePage(nextCourse.path)"
+          />
         </clientOnly>
       </template>
     </AppCard>
@@ -57,7 +100,9 @@
 
 <script setup lang="ts">
 const route = useRoute();
-const { course, prevCourse, nextCourse } = useCourse(route.params.courseSlug as string);
+const { course, prevCourse, nextCourse } = await useCourse(
+  route.params.courseSlug as string,
+);
 // if(!course) {
 //   throw createError({
 //     statusCode: 404,
@@ -79,9 +124,9 @@ definePageMeta({
   alias: ['/lecture/:courseSlug'],
   // layout:'same-layer'
   // validate: (route)=> {
-  middleware: (route) => {
-    const courseSlug = route.params.courseSlug as string
-    const { course } = useCourse(courseSlug);
+  middleware: async (route) => {
+    const courseSlug = route.params.courseSlug as string;
+    const { course } = await useCourse(courseSlug);
     if (!course) {
       // return navigateTo('/');
       return abortNavigation(
@@ -89,23 +134,24 @@ definePageMeta({
           statusCode: 404,
           statusMessage: 'Course not found!!',
           fatal: true,
-        }))
+        }),
+      );
     }
-  }
+  },
 });
 
-const memo = ref('')
+const memo = ref('');
 const completed = ref(false);
 
 const movePage = async (path: string) => {
   await navigateTo(path);
-}
+};
 
 const toggleComplete = () => {
   // $fetch('/api/error');
   // showError('에러가 발생하였습니다.')
-  completed.value = !completed.value
-  throw createError("에러가 발생하였습니다!");
+  completed.value = !completed.value;
+  throw createError('에러가 발생하였습니다!');
 };
 </script>
 
