@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { getUserByEmail } from '~/server/api/models/user';
 import { verifyPassword } from '~/server/utils/password';
 
@@ -24,6 +25,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const verified = verifyPassword(password, userWithPassword.password);
+
   if (!verified) {
     throw createError({
       statusCode: 401,
