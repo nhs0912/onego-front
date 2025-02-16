@@ -5,8 +5,15 @@ export const useAuthStore = defineStore(
   'auth',
   () => {
     const authUser = ref<Maybe<UserWithoutPassword>>();
-    const signIn = (email: string, password: string) => {
-      const foundUser = getUser(email, password);
+    const signIn = async (email: string, password: string) => {
+      const data = await $fetch<{ user: UserWithoutPassword }>('/auth/login', {
+        method: 'POST',
+        body: {
+          email,
+          password,
+        },
+      });
+      const { user: foundUser } = data;
 
       if (!foundUser) {
         throw createError({
@@ -20,6 +27,7 @@ export const useAuthStore = defineStore(
       (authUser.value = user);
 
     const signOut = () => setUser(null);
+
     return {
       user: authUser,
       isAuthenticated: computed(() => !!authUser.value),
