@@ -1,5 +1,5 @@
 import type { UserWithoutPassword } from '~/types/user';
-import { getUser } from '~/composables/auth/userData';
+// import { getUser } from '~/composables/auth/userData';
 
 export const useAuthStore = defineStore(
   'auth',
@@ -26,7 +26,17 @@ export const useAuthStore = defineStore(
     const setUser = (user: Maybe<UserWithoutPassword>) =>
       (authUser.value = user);
 
-    const signOut = () => setUser(null);
+    const signOut = async () => {
+      await $fetch('/auth/logout', {
+        method: 'POST',
+      });
+      setUser(null);
+    };
+
+    const fetchUser = async () => {
+      const data = await $fetch<{ user: UserWithoutPassword }>('/auth/user');
+      setUser(data.value);
+    };
 
     return {
       user: authUser,
