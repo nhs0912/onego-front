@@ -1,5 +1,7 @@
 export default defineEventHandler((event) => {
   const userJsonString = getCookie(event, '__user');
+  console.log('userJsonString: ', userJsonString);
+
   if (!userJsonString) {
     return { user: null };
   }

@@ -34,8 +34,10 @@ export const useAuthStore = defineStore(
     };
 
     const fetchUser = async () => {
-      const data = await $fetch<{ user: UserWithoutPassword }>('/auth/user');
-      setUser(data.value);
+      const data = await $fetch<{ user: UserWithoutPassword }>('/auth/user', {
+        headers: useRequestHeaders(['cookie']),
+      });
+      setUser(data.user);
     };
 
     return {
@@ -46,6 +48,7 @@ export const useAuthStore = defineStore(
       ),
       signIn,
       signOut,
+      fetchUser,
     };
   },
   {
