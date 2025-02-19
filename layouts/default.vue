@@ -42,18 +42,16 @@
           />
         </NuxtLink>
         <q-separator dark vertical />
-        <q-btn-dropdown stretch flat no-caps :label="selectedLanguageName">
+        <q-btn-dropdown stretch flat no-caps :label="currentLocaleLabel">
           <q-list padding dense>
-            <q-item
-              v-for="{ code, name } in languages"
-              :key="code"
-              v-close-popup
-              clickable
-              :active="code === $i18n.locale"
-              @click="$i18n.locale = code"
-            >
+            <q-item v-close-popup clickable :to="localePath('/', 'en')">
               <q-item-section>
-                <q-item-label>{{ name }}</q-item-label>
+                <q-item-label>English</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item v-close-popup clickable :to="switchLocalPath('ko')">
+              <q-item-section>
+                <q-item-label>한국어</q-item-label>
               </q-item-section>
             </q-item>
           </q-list>
@@ -91,6 +89,7 @@
       <!-- <ClientOnly> -->
       <q-banner v-if="isAuthenticated" class="bg-primary text-white">
         {{ authUser }}
+        isAuthenticated = {{ isAuthenticated }}
       </q-banner>
       <!-- </ClientOnly> -->
       <slot></slot>
@@ -99,16 +98,19 @@
 </template>
 
 <script setup lang="ts">
+// import { useI18n } from 'vue-i18n';
 // const { signOut } = useAuth();
 const authStore = useAuthStore();
 const { user: authUser, isAuthenticated } = storeToRefs(authStore);
 const { signOut } = authStore;
+const { locale, t } = useI18n();
+const localePath = useLocalePath();
+const switchLocalPath = useSwitchLocalePath();
 
 const pageContainerStyle = computed(() => ({
   maxWidth: '1080px',
   margin: '0 auto',
 }));
-// import { useI18n } from 'vue-i18n';
 
 const moveYoutube = async () => {
   await navigateTo('https://youtube.com', {
@@ -117,21 +119,36 @@ const moveYoutube = async () => {
   });
 };
 
-interface Language {
-  name: string;
-  code: 'en' | 'ko';
-}
+// interface Language {
+//   name: string;
+//   code: 'en' | 'ko';
+// }
 
-const languages = ref<Language[]>([
-  { name: 'English', code: 'en' },
-  { name: '한국어', code: 'ko' },
-]);
+// const languages = ref<Language[]>([
+//   { name: 'English', code: 'en' },
+//   { name: '한국어', code: 'ko' },
+// ]);
 
-const { locale, t } = useI18n();
+// const { locale, t } = useI18n();
 
-const selectedLanguageName = computed(
-  () => languages.value.find((lang) => lang.code === locale.value)?.name,
-);
+// const selectedLanguageName = computed(
+//   () => languages.value.find((lang) => lang.code === locale.value)?.name,
+// );
 
-watch(locale, (val) => (useCookie('locale').value = val));
+// watch(locale, (val) => (useCookie('locale').value = val));
+
+// const $t = (str: string) => str;
+
+const currentLocaleLabel = computed(() => {
+  // 현재 로케일에 따라 라벨을 반환합니다.
+  switch (locale.value) {
+    case 'en':
+      return 'English';
+    case 'ko':
+      return '한국어';
+    // 다른 로케일이 있다면 case 문을 추가합니다.
+    default:
+      return 'Language'; // 기본 라벨
+  }
+});
 </script>

@@ -42,7 +42,7 @@ export const useAuthStore = defineStore(
 
     return {
       user: authUser,
-      isAuthenticated: computed(() => !!authUser.value),
+      isAuthenticated: computed(() => !!authUser.value?.id),
       isAdmin: computed(() =>
         !authUser.value ? false : authUser.value.roles.includes('ADMIN'),
       ),
