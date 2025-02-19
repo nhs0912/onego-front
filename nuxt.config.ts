@@ -28,4 +28,10 @@ export default defineNuxtConfig({
       },
     },
   },
+  app: {
+    head: {
+      title: 'OneGo',
+      meta: [{ name: 'description', content: 'Onego project입니다.' }],
+    },
+  },
 });
