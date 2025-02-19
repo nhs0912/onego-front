@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type i18n from '~/plugins/i18n';
+// import type i18n from '~/plugins/i18n';
 const { t } = useI18n();
 defineProps<{
   accountName: string | undefined;

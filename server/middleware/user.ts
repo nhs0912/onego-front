@@ -1,11 +1,7 @@
 export default defineEventHandler((event) => {
   const user = getUserFromEvent(event);
-
-  if (!user) {
-    return { user: null };
+  console.log('middleWare user : ', user);
+  if (user) {
+    event.context.user = user;
   }
-
-  return {
-    user,
-  };
 });
