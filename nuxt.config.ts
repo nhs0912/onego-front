@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/i18n',
+    '@vueuse/nuxt',
   ],
   i18n: {
     locales: ['en', 'ko'], // URL 경로 접두사에 사용됨
