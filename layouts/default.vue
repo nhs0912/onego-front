@@ -6,7 +6,7 @@
         <q-avatar>
           <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
         </q-avatar>
-        <q-toolbar-title>OneGo </q-toolbar-title>
+        <q-toolbar-title>{{ appConfig.title }} </q-toolbar-title>
         <q-separator dark vertical />
         <NuxtLink v-slot="{ navigate }" custom to="/">
           <q-btn stretch flat :label="t('home')" no-caps @click="navigate()" />
@@ -151,4 +151,7 @@ const currentLocaleLabel = computed(() => {
       return 'Language'; // 기본 라벨
   }
 });
+
+const appConfig = useAppConfig();
+console.log('appConfig : ', appConfig);
 </script>
