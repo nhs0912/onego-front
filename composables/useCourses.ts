@@ -1,20 +1,21 @@
 // import coursesData from '@/composables/coursesData';
-import type { CourseWithPath } from '@/types/course';
+import type { CourseWithPath } from '~/types/course';
 
 interface CoursesReturn {
-  courses: CourseWithPath[];
+  courses: Maybe<CourseWithPath[]>;
 }
 
 export const useCourses = async (): Promise<CoursesReturn> => {
-  const { data, error } = await useFetch('/api/courses');
+  const { data, error } = await useFetch<CourseWithPath[]>('/api/courses');
 
   if (error.value) {
+    console.log('에러나옴!!');
     throw createError({
       ...error.value,
     });
   }
   return {
-    courses: data.value as CourseWithPath[],
+    courses: data.value,
   };
 
   // const courses: CourseWithPath[] = coursesData.map((item) => ({

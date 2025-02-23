@@ -24,7 +24,7 @@
 
             <!-- <NuxtLink to='/course/prefetching-2'>Prefetching test 2</NuxtLink>
             <NuxtLink to='/course/prefetching-3'>Prefetching test 3</NuxtLink> -->
-            <NuxtLink v-slot="{ navigate }" custom to="/course/prefetching-1">
+            <!-- <NuxtLink v-slot="{ navigate }" custom to="/course/prefetching-1">
               <q-item clickable @click="navigate()">Prefetching Test 1</q-item>
             </NuxtLink>
             <NuxtLink v-slot="{ navigate }" custom to="/course/prefetching-2">
@@ -32,7 +32,7 @@
             </NuxtLink>
             <NuxtLink v-slot="{ navigate }" custom to="/course/prefetching-3">
               <q-item clickable @click="navigate()">Prefetching Test 3</q-item>
-            </NuxtLink>
+            </NuxtLink> -->
           </q-list>
         </q-card>
       </div>

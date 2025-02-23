@@ -104,9 +104,12 @@
 
 <script setup lang="ts">
 const route = useRoute();
-const { course, prevCourse, nextCourse } = await useCourse(
-  route.params.courseSlug as string,
-);
+// const { course, prevCourse, nextCourse } = await useCourse(
+//   route.params.courseSlug as string,
+// );
+
+const courseSlug = route.params.courseSlug as string;
+const { course, prevCourse, nextCourse } = (await useCourse(courseSlug)) || {};
 
 useSeoMeta({
   title: () => course?.title || '',
@@ -138,7 +141,7 @@ definePageMeta({
   // validate: (route)=> {
   middleware: async (route) => {
     const courseSlug = route.params.courseSlug as string;
-    const { course } = await useCourse(courseSlug);
+    const { course } = (await useCourse(courseSlug)) || {};
     if (!course) {
       // return navigateTo('/');
       return abortNavigation(
