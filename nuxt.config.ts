@@ -46,4 +46,11 @@ export default defineNuxtConfig({
       meta: [{ name: 'description', content: 'Onego project입니다.' }],
     },
   },
+  runtimeConfig: {
+    authCookieName: '__user',
+    jwtSccretKey: 'superkey',
+    public: {
+      clientConfigValue: 'test',
+    },
+  },
 });
